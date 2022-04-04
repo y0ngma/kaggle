@@ -98,10 +98,62 @@ df.drop('Id', axis=1, inplace=True)
 # sns.violinplot(x='Species', y='SepalWidthCm', data=df)
 # plt.show()
 
-plt.figure(figsize=(7,4))
-# draws heatmap with input as the correlation matrix calculated by df.corr()
-sns.heatmap(df.corr(), annot=True, cmap='cubehelix_r')
+# plt.figure(figsize=(7,4))
+# # draws heatmap with input as the correlation matrix calculated by df.corr()
+# sns.heatmap(df.corr(), annot=True, cmap='cubehelix_r')
+# plt.show()
+
+train, test = train_test_split(df, test_size=0.3)
+print('학습용:{}, 검증용:{}'.format(train.shape, test.shape))
+
+train_X = train[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+train_y = train.Species
+test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+test_y = test.Species
+
+# print(train_X.head(2))
+# print(test_y.head())
+
+model = svm.SVC() # select the algorithm
+model.fit(train_X, train_y) # train the algorithm with data and output
+prediction = model.predict(test_X) # pass the testing data to the trained algorithm
+whichacc = 'Acc. of the SVM'
+print("{0: <35} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+
+model = LogisticRegression()
+model.fit(train_X, train_y)
+prediction = model.predict(test_X)
+whichacc = 'Acc. of the Logistic Regression'
+print("{0: <35} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+
+model = DecisionTreeClassifier()
+model.fit(train_X, train_y)
+prediction=model.predict(test_X)
+whichacc = 'Acc. of the Decisition Tree'
+print("{0: <35} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+
+model = KNeighborsClassifier(n_neighbors=3) # this examines 3 neighbors for putting the new data into a class
+model.fit(train_X, train_y)
+prediction=model.predict(test_X)
+whichacc = 'Acc. of the KNN'
+print("{0: <35} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+
+
+a_index = list(range(1,11))
+a = pd.Series(dtype='float64')
+# print(a.dtype)
+for i in a_index:
+    model = KNeighborsClassifier(n_neighbors=i)
+    model.fit(train_X, train_y)
+    prediction = model.predict(test_X)
+    tmp = metrics.accuracy_score(prediction, test_y)
+    print("{0: <35} : {1:?<+4,.5f}".format(f"Acc. of KNN with n_neightbors={i}", tmp))
+    a = a.append(pd.Series(tmp))
+plt.plot(a_index, a)
+plt.xticks(a_index)
 plt.show()
+
+
 
 # myencoding = 'utf-8'
 # out = subprocess.run(args=[sys.executable, f'{data_folder}/mytest.py'],
