@@ -18,8 +18,8 @@ data_folder = f"{os.path.dirname(PROJECT_DIR)}/data"
 data_path   = f"{data_folder}/Iris.csv"
 save_dir    = f"{data_folder}/{os.path.basename(os.path.splitext(data_path)[0])}_output.txt"
 
-df = pd.read_csv(data_path)
-df.drop('Id', axis=1, inplace=True)
+# df = pd.read_csv(data_path)
+# df.drop('Id', axis=1, inplace=True)
 # print(df.head())
 # print(df.info())
 
@@ -103,133 +103,119 @@ df.drop('Id', axis=1, inplace=True)
 # sns.heatmap(df.corr(), annot=True, cmap='cubehelix_r')
 # plt.show()
 
-train, test = train_test_split(df, test_size=0.3)
-print('학습용:{}, 검증용:{}'.format(train.shape, test.shape))
+# train, test = train_test_split(df, test_size=0.3)
+# print('학습용:{}, 검증용:{}'.format(train.shape, test.shape))
 
-train_X = train[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
-train_y = train.Species
-test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
-test_y = test.Species
+# train_X = train[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+# train_y = train.Species
+# test_X = test[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+# test_y = test.Species
 
-# print(train_X.head(2))
-# print(test_y.head())
+# # print(train_X.head(2))
+# # print(test_y.head())
 
-model = svm.SVC() # select the algorithm
-model.fit(train_X, train_y) # train the algorithm with data and output
-prediction = model.predict(test_X) # pass the testing data to the trained algorithm
-whichacc = 'Acc. of the SVM'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+# model = svm.SVC() # select the algorithm
+# model.fit(train_X, train_y) # train the algorithm with data and output
+# prediction = model.predict(test_X) # pass the testing data to the trained algorithm
+# whichacc = 'Acc. of the SVM'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
 
-model = LogisticRegression()
-model.fit(train_X, train_y)
-prediction = model.predict(test_X)
-whichacc = 'Acc. of the Logistic Regression'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+# model = LogisticRegression()
+# model.fit(train_X, train_y)
+# prediction = model.predict(test_X)
+# whichacc = 'Acc. of the Logistic Regression'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
 
-model = DecisionTreeClassifier()
-model.fit(train_X, train_y)
-prediction=model.predict(test_X)
-whichacc = 'Acc. of the Decisition Tree'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
+# model = DecisionTreeClassifier()
+# model.fit(train_X, train_y)
+# prediction=model.predict(test_X)
+# whichacc = 'Acc. of the Decisition Tree'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
 
-model = KNeighborsClassifier(n_neighbors=3) # this examines 3 neighbors for putting the new data into a class
-model.fit(train_X, train_y)
-prediction=model.predict(test_X)
-whichacc = 'Acc. of the KNN'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
-
-
-a_index = list(range(1,11))
-a = pd.Series(dtype='float64')
-# print(a.dtype)
-for i in a_index:
-    model = KNeighborsClassifier(n_neighbors=i)
-    model.fit(train_X, train_y)
-    prediction = model.predict(test_X)
-    tmp = metrics.accuracy_score(prediction, test_y)
-    print("{0: <44} : {1:?<+4,.5f}".format(f"Acc. of KNN with n_neightbors={i}", tmp))
-    a = a.append(pd.Series(tmp))
-plt.plot(a_index, a)
-plt.xticks(a_index)
-plt.show()
-
-# corr() 값 낮은것 이용한 데이터셋으로 진행해서 정확도 비교해보기
-petal = df[['PetalLengthCm', 'PetalWidthCm', 'Species']]
-sepal = df[['SepalLengthCm', 'SepalWidthCm', 'Species']]
-
-train_p, test_p = train_test_split(petal, test_size=0.3, random_state=0)
-train_x_p = train_p[['PetalLengthCm', 'PetalWidthCm']]
-train_y_p = train_p.Species
-test_x_p = test_p[['PetalLengthCm', 'PetalWidthCm']]
-test_y_p = test_p.Species
-
-train_s, test_s = train_test_split(sepal, test_size=0.3, random_state=0)
-train_x_s = train_s[['SepalLengthCm', 'SepalWidthCm']]
-train_y_s = train_s.Species
-test_x_s = test_s[['SepalLengthCm', 'SepalWidthCm']]
-test_y_s = test_s.Species
+# model = KNeighborsClassifier(n_neighbors=3) # this examines 3 neighbors for putting the new data into a class
+# model.fit(train_X, train_y)
+# prediction=model.predict(test_X)
+# whichacc = 'Acc. of the KNN'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y)))
 
 
-model = svm.SVC()
-model.fit(train_x_p, train_y_p)
-prediction = model.predict(test_x_p)
-whichacc = 'Acc. of the SVM using Petal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
-model.fit(train_x_s, train_y_s)
-prediction = model.predict(test_x_s)
-whichacc = 'Acc. of the SVM using Sepal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+# a_index = list(range(1,11))
+# a = pd.Series(dtype='float64')
+# # print(a.dtype)
+# for i in a_index:
+#     model = KNeighborsClassifier(n_neighbors=i)
+#     model.fit(train_X, train_y)
+#     prediction = model.predict(test_X)
+#     tmp = metrics.accuracy_score(prediction, test_y)
+#     print("{0: <44} : {1:?<+4,.5f}".format(f"Acc. of KNN with n_neightbors={i}", tmp))
+#     a = a.append(pd.Series(tmp))
+# plt.plot(a_index, a)
+# plt.xticks(a_index)
+# plt.show()
 
-model = LogisticRegression()
-model.fit(train_x_p, train_y_p)
-prediction = model.predict(test_x_p)
-whichacc = 'Acc. of the Logistic Regression using Petal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
-model.fit(train_x_s, train_y_s)
-prediction = model.predict(test_x_s)
-whichacc = 'Acc. of the Logistic Regression using Sepal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+# # corr() 값 낮은것 이용한 데이터셋으로 진행해서 정확도 비교해보기
+# petal = df[['PetalLengthCm', 'PetalWidthCm', 'Species']]
+# sepal = df[['SepalLengthCm', 'SepalWidthCm', 'Species']]
 
-model = DecisionTreeClassifier()
-model.fit(train_x_p, train_y_p)
-prediction = model.predict(test_x_p)
-whichacc = 'Acc. of the Decision Tree using Petal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
-model.fit(train_x_s, train_y_s)
-prediction = model.predict(test_x_s)
-whichacc = 'Acc. of the Decision Tree using Sepal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+# train_p, test_p = train_test_split(petal, test_size=0.3, random_state=0)
+# train_x_p = train_p[['PetalLengthCm', 'PetalWidthCm']]
+# train_y_p = train_p.Species
+# test_x_p = test_p[['PetalLengthCm', 'PetalWidthCm']]
+# test_y_p = test_p.Species
 
-model = KNeighborsClassifier(n_neighbors=3)
-model.fit(train_x_p, train_y_p)
-prediction = model.predict(test_x_p)
-whichacc = 'Acc. of the KNN using Petal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
-model.fit(train_x_s, train_y_s)
-prediction = model.predict(test_x_s)
-whichacc = 'Acc. of the KNN using Sepal'
-print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+# train_s, test_s = train_test_split(sepal, test_size=0.3, random_state=0)
+# train_x_s = train_s[['SepalLengthCm', 'SepalWidthCm']]
+# train_y_s = train_s.Species
+# test_x_s = test_s[['SepalLengthCm', 'SepalWidthCm']]
+# test_y_s = test_s.Species
 
 
+# model = svm.SVC()
+# model.fit(train_x_p, train_y_p)
+# prediction = model.predict(test_x_p)
+# whichacc = 'Acc. of the SVM using Petal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
+# model.fit(train_x_s, train_y_s)
+# prediction = model.predict(test_x_s)
+# whichacc = 'Acc. of the SVM using Sepal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+
+# model = LogisticRegression()
+# model.fit(train_x_p, train_y_p)
+# prediction = model.predict(test_x_p)
+# whichacc = 'Acc. of the Logistic Regression using Petal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
+# model.fit(train_x_s, train_y_s)
+# prediction = model.predict(test_x_s)
+# whichacc = 'Acc. of the Logistic Regression using Sepal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+
+# model = DecisionTreeClassifier()
+# model.fit(train_x_p, train_y_p)
+# prediction = model.predict(test_x_p)
+# whichacc = 'Acc. of the Decision Tree using Petal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
+# model.fit(train_x_s, train_y_s)
+# prediction = model.predict(test_x_s)
+# whichacc = 'Acc. of the Decision Tree using Sepal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
+
+# model = KNeighborsClassifier(n_neighbors=3)
+# model.fit(train_x_p, train_y_p)
+# prediction = model.predict(test_x_p)
+# whichacc = 'Acc. of the KNN using Petal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_p)))
+# model.fit(train_x_s, train_y_s)
+# prediction = model.predict(test_x_s)
+# whichacc = 'Acc. of the KNN using Sepal'
+# print("{0: <44} : {1: <+4,.5f}".format(whichacc, metrics.accuracy_score(prediction, test_y_s)))
 
 
+myencoding = 'utf-8'
+out = subprocess.run(args=[sys.executable, f'{data_folder}/mytest.py'],
+                     capture_output=True)
 
-
-
-
-
-
-
-
-
-
-
-
-# myencoding = 'utf-8'
-# out = subprocess.run(args=[sys.executable, f'{data_folder}/mytest.py'],
-#                      capture_output=True)
-
-# with open(save_dir, 'w', encoding=myencoding) as f:
-#     f.write(out.stdout.decode())
-# print(save_dir)
-
+with open(save_dir, 'w', encoding=myencoding) as f:
+    f.write(out.stdout.decode())
+    # f.write(out.stderr.decode())
+print('결과물 저장경로:', save_dir)
