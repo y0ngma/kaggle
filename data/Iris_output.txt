@@ -1,16 +1,16 @@
 학습용:(105, 5), 검증용:(45, 5)
-Acc. of the SVM                              : +0.97778
-Acc. of the Logistic Regression              : +0.97778
-Acc. of the Decisition Tree                  : +0.97778
+Acc. of the SVM                              : +0.95556
+Acc. of the Logistic Regression              : +0.95556
+Acc. of the Decisition Tree                  : +0.95556
 Acc. of the KNN                              : +0.97778
-Acc. of KNN with n_neightbors=1              : +0.97778
-Acc. of KNN with n_neightbors=2              : +0.97778
+Acc. of KNN with n_neightbors=1              : +0.95556
+Acc. of KNN with n_neightbors=2              : +0.95556
 Acc. of KNN with n_neightbors=3              : +0.97778
-Acc. of KNN with n_neightbors=4              : +0.97778
-Acc. of KNN with n_neightbors=5              : +0.97778
+Acc. of KNN with n_neightbors=4              : +1.00000
+Acc. of KNN with n_neightbors=5              : +0.95556
 Acc. of KNN with n_neightbors=6              : +0.97778
 Acc. of KNN with n_neightbors=7              : +0.97778
-Acc. of KNN with n_neightbors=8              : +0.97778
+Acc. of KNN with n_neightbors=8              : +0.95556
 Acc. of KNN with n_neightbors=9              : +0.97778
 Acc. of KNN with n_neightbors=10             : +0.97778
 Acc. of the SVM using Petal                  : +0.97778
@@ -18,14 +18,6 @@ Acc. of the SVM using Sepal                  : +0.80000
 Acc. of the Logistic Regression using Petal  : +0.97778
 Acc. of the Logistic Regression using Sepal  : +0.82222
 Acc. of the Decision Tree using Petal        : +0.95556
-Acc. of the Decision Tree using Sepal        : +0.64444
+Acc. of the Decision Tree using Sepal        : +0.66667
 Acc. of the KNN using Petal                  : +0.97778
 Acc. of the KNN using Sepal                  : +0.73333
-C:\Users\home\anaconda3\envs\crawling\lib\site-packages\sklearn\linear_model\_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
-STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-
-Increase the number of iterations (max_iter) or scale the data as shown in:
-    https://scikit-learn.org/stable/modules/preprocessing.html
-Please also refer to the documentation for alternative solver options:
-    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-  n_iter_i = _check_optimize_result(

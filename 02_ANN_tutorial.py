@@ -23,18 +23,33 @@ y_l = np.load(f"{data_folder}/X.npy")
 
 img_size = 64
 plt.subplot(1, 2, 1)
-# print(x_l[260].reshape(img_size, img_size).shape)
+print(type(x_l))
+print(len(x_l))
+print(type(x_l[260]))
+print(len(x_l[260]))
+print(x_l[260].reshape(img_size, img_size).shape)
 plt.imshow(x_l[260].reshape(img_size, img_size))
 plt.axis('off')
 plt.subplot(1, 2, 2)
 plt.imshow(x_l[900].reshape(img_size, img_size))
 plt.axis('off')
-plt.show()
+# plt.show()
 
 # Join a sequence of arrays along an row axis.
 X = np.concatenate((x_l[204:409], x_l[822:1027] ), axis=0) # from 0 to 204 is zero sign and from 205 to 410 is one sign 
 z = np.zeros(205)
+print(z)
+print(type(z))
+print(type(z[0]))
+print(len(z))
 o = np.ones(205)
-Y = np.concatenate((z, o), axis=0).reshape(X.shape[0],1)
-print("X shape: " , X.shape)
-print("Y shape: " , Y.shape)
+# print(o)
+# Y = np.concatenate((z, o), axis=0)
+# print(Y)
+# # print(X.shape[0])
+# print(X.shape)
+# Y = np.concatenate((z, o), axis=0).reshape(X.shape[0],1)
+
+# print("X shape: " , X.shape)
+# print("Y shape: " , Y.shape)
+
